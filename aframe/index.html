@@ -1,40 +1,84 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <title>Lab2 - VR application</title>
     <meta name="description" content="Basic example for Point Cloud component."></meta>
-    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
-    <script src="js/aframe-pointcloud-component.js"></script>
+	
+	<script src="js/aframe.min.js"></script>
+    <script src="js/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
+	<script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
+	<script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
+	<script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
+	<script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/intersection-spawn.js"></script>
+		
   </head>
   <body>
-    <a-scene>
-      <a-assets>
-        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
-        <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
-      </a-assets>
+    <a-scene stats>
+	      <a-assets>
+		<img id="ground" src="ground.jpg">
+		 <img id="sky" src="sky2.png">
+	  	<a-asset-item id="rubicsCube" response-type="arraybuffer" src="https://cdn.glitch.com/173e7bb8-8b3d-468f-9b0c-d9e0a9d068f3%2Frubic.glb?1551486575373"></a-asset-item>
+	 
+	 </a-assets>
+<a-mixin id="voxel"
+         geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
+         material="shader: standard"
+         random-color
+		 animation=" loop: true; property: rotation; to: 360 360 360; dur: 4000; delay: 2000 "
+		 animation__2=" loop: true; property: position; to: 1 1.5 2; dur: 4000; delay: 2000 "
+         snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
+      ></a-mixin>
 
-      <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
-      <a-light type="ambient" color="#445451"></a-light>
-      <a-light type="point" intensity="2" position="2 4 4"></a-light>
-      <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
-      <a-entity laser-controls line="color: red; opacity: 0.75"></a-entity>
-      <a-pointcloud 
-        scale="0.1 0.1 0.1" 
-        position="0 0.08 -2.5" 
-        rotation="-90 45 0" 
-        src="url(sculpt.ply)" 
-        size="0.01">
-      </a-pointcloud>
-      <a-pointcloud 
-        scale="0.5 0.5 0.5" 
-        position="1.5 2 0.5" 
-        src="url(Sphere.ply)" 
-        size="0.05"
-        texture="url(VGTU-logo.png)"
-        depthWrite="false">
-      </a-pointcloud>
+	  <a-plane src="#ground" height="50" width="50" position="0.1 0.1 0.1" rotation="-90 0 0"></a-plane>
+	  <a-sky src="#sky"></a-sky>
 
-    </a-scene>
+	<!-- RUBIC CUBE -->			
+ <a-entity gltf-model="#rubicsCube" rotation="20-45 0" position="1 1.1 -2" scale="0.01 0.01 0.01" 
+ animation=" begin: 'click'; loop: true; property: rotation; to: 20 360 0; dur: 4000 "
+ animation-mixer=" clip:Take 001; loop: true; timeScale: 1; crossFadeDuration: 1">
+        </a-entity>>
+ 
+
+<a-entity camera look-controls>
+  <a-entity cursor="fuse: true; fuseTimeout: 100"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat">
+  </a-entity>
+</a-entity>
+
+
+<a-entity id="box" position="1 0.4 -2" rotation="0 0 0" cursor-listener geometry="primitive: box" material="color: blue"></a-entity>
+
+
+    <a-entity id="cube" hand-controls="right" controller-cursor intersection-spawn="event: click; mixin: voxel"></a-entity>
+
+<a-camera position="1 1.5 2">
+      <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+    </a-camera>
+
+			
+			
+          <a-light type="point" color="#FFFFFF" position="0 4 0"></a-light>
+						
+		<a-text font="kelsonsans" value="Antras multimediju laboras" width="6" position="-0.5 2 -1.5"
+              rotation="0 15 0"></a-text>
+		<a-text font="kelsonsans" value="Antro multimediju laboro kita puse" width="6" position="-0.5 2 -1.5"
+              rotation="180 15 0"></a-text>	
+	</a-scene>
+	
+	<script>
+	AFRAME.registerComponent('cursor-listener', {
+  init: function () {
+    var lastIndex = -1;
+    var COLORS = ['red', 'green', 'blue', 'yellow', 'white', 'orange'];
+    this.el.addEventListener('mouseenter', function (evt) {
+      lastIndex = (lastIndex + 1) % COLORS.length;
+      this.setAttribute('material', 'color', COLORS[lastIndex]);
+    });
+  }});
+	</script>
   </body>
 </html>

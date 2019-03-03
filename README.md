@@ -1,3 +1,8 @@
+- Test application on at least two browsers and specify in README.md which version and browser it was. 
+1.Firefox V65.0.2 (64-bit)
+2.Google chrome V72.0.3626.119
+
+
 # mediaLab2
 
 This lab aims to build your first Virtual reality (VR) app.
