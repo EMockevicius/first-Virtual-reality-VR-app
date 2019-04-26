@@ -1,7 +1,7 @@
 - Test application on at least two browsers and specify in README.md which version and browser it was. 
 1.Firefox V65.0.2 (64-bit)
 2.Google chrome V72.0.3626.119
-
+test it at https://theboxnwb.github.io/mediaLab2/aframe/
 
 # mediaLab2
 
