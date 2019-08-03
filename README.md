@@ -1,18 +1,8 @@
-- Test application on at least two browsers and specify in README.md which version and browser it was. 
+Tests made on:
 1.Firefox V65.0.2 (64-bit)
 2.Google chrome V72.0.3626.119
+
 test it at https://theboxnwb.github.io/mediaLab2/aframe/
-
-# mediaLab2
-
-This lab aims to build your first Virtual reality (VR) app.
-
-There are many open source alternatives to build virtual reality application. One of the web based solution is A-frame. You can try a live examples: https://aframe.io/aframe/examples/
-
-# Requirements for repository
-  - You have to clone this repository and make two branches (master and develop).
-  - The develop branch should contain commits of every new feature of the VR application.
-  - When all features will be ready you have to merge the development branch to the master.
 
 # Requirements for VR application
   - You have to update A-frame version 0.6.0 to the newest with the point cloud plugin.
