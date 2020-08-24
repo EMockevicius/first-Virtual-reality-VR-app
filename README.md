@@ -2,7 +2,7 @@ Tests made on:
 1.Firefox V65.0.2 (64-bit)
 2.Google chrome V72.0.3626.119
 
-test it at https://eimantasmockevicius.github.io/first-Virtual-reality-VR-app/aframe/
+test it at https://emockevicius.github.io/first-Virtual-reality-VR-app/aframe/
 
 # Requirements for VR application
   - You have to update A-frame version 0.6.0 to the newest with the point cloud plugin.
